@@ -4,9 +4,11 @@ export class QueryFormatModel {
 }
 
 export class AndTerm {
+    public index: number;
     public query: string[] = [];
 }
 
 export class OrTerm {
+    public index: number;
     public andTerms: AndTerm[] = [];
 }

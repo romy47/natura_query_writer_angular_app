@@ -6,7 +6,8 @@
       <span class="app-search-category"></span>
       with
       <span *ngFor="let orTerm of queryStructure.orTerms" [orTerm]="orTerm" class="app-or-terms"></span>
-      <button type="button" class="btn btn-outline btn-info" (click)="createComponent()">Add</button>
+      <span (menuEvent)="menuEvent($event)" class="app-query-menu"></span>
+      <!-- <button type="button" class="btn btn-outline btn-info" (click)="createComponent()">Add</button> -->
     </span>
   </div>
 </div>

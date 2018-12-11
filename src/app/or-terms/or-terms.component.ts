@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OrTerm } from '../models/query-format.model';
+import { OrTerm, AndTerm } from '../models/query-format.model';
 
 @Component({
   selector: '.app-or-terms',
@@ -11,7 +11,22 @@ export class OrTermsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.orTerm)
+    console.log(this.orTerm);
   }
 
+  menuEvent(event: string) {
+    switch (event.toLocaleLowerCase()) {
+      case 'and':
+        this.createAndTerm();
+    }
+  }
+
+  createAndTerm() {
+    const and = new AndTerm();
+    this.orTerm.andTerms.push(and);
+    this.orTerm.andTerms.forEach((element, index) => {
+      element.index = index;
+    });
+    console.log(this.orTerm);
+  }
 }

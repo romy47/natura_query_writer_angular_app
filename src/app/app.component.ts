@@ -12,12 +12,29 @@ export class AppComponent {
   componentRef: any;
   public queryStructure: QueryFormatModel = new QueryFormatModel();
   constructor() {
-  this.queryStructure.orTerms.push(new OrTerm());
-  this.queryStructure.orTerms[0].andTerms.push(new AndTerm());
-  console.log(this.queryStructure);
+    this.createOrTerm();
   }
 
   createComponent() {
     this.queryStructure.orTerms[0].andTerms.push(new AndTerm());
+  }
+
+  menuEvent(event: string) {
+    switch (event.toLocaleLowerCase()) {
+      case 'or':
+        this.createOrTerm();
+    }
+  }
+
+  createOrTerm() {
+    const and = new AndTerm();
+    and.index = 0;
+    const or = new OrTerm();
+    or.andTerms.push(and);
+    this.queryStructure.orTerms.push(or);
+    this.queryStructure.orTerms.forEach((element, index) => {
+      element.index = index;
+    });
+    console.log(this.queryStructure);
   }
 }
