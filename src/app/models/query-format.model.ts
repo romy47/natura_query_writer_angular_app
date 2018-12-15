@@ -1,14 +1,18 @@
 export class QueryFormatModel {
     public categories: string[] = [];
-    public orTerms: OrTerm[] = [];
+    public queryGroups: QueryGroup[] = [];
 }
 
-export class AndTerm {
-    public index: number;
-    public query: string[] = [];
-}
+export class QueryGroup {
+    public id: string;
+    public isSingle = true;
+    public verticalIndex: number;
+    public horizontalIndex: number;
+    public type: string;
+    public query: string;
+    public queryGroups: QueryGroup[] = [];
 
-export class OrTerm {
-    public index: number;
-    public andTerms: AndTerm[] = [];
+    constructor() {
+        this.id = new Date().toString();
+    }
 }

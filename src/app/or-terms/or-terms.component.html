@@ -1,1 +1,0 @@
-<ng-container *ngIf="orTerm.index!=0"> or </ng-container><span *ngFor="let andTerm of orTerm.andTerms" [andTerm]="andTerm" class="app-and-terms"></span><span (menuEvent)="menuEvent($event)" [parent]="'or'" class="app-query-menu"></span>

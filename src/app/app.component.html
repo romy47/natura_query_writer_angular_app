@@ -5,10 +5,14 @@
       Show me
       <span class="app-search-category"></span>
       with
-      <span *ngFor="let orTerm of queryStructure.orTerms" [orTerm]="orTerm" class="app-or-terms"></span>
-      <span (menuEvent)="menuEvent($event)" class="app-query-menu"></span>
-      <!-- <button type="button" class="btn btn-outline btn-info" (click)="createComponent()">Add</button> -->
+      <span *ngFor="let group of queryStructure.queryGroups" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-group-terms"></span>
     </span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    
   </div>
 </div>
 <!-- <h1 style="font-size: 50px;">Show Me</h1> -->

@@ -14,7 +14,7 @@ export class QueryMenuComponent implements OnInit {
   items: MenuItem[];
 
   ngOnInit() {
-    if (this.parent === 'app') {
+    // if (this.parent === 'app') {
       this.items = [
         {
           label: 'Or',
@@ -43,6 +43,29 @@ export class QueryMenuComponent implements OnInit {
           ]
         },
         {
+          label: 'Group',
+          items: [
+            {
+              label: 'Or',
+              command: (event) => { this.groupOrClick(); },
+              items: [
+                {
+                  label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
+                }
+              ]
+            },
+            {
+              label: 'And',
+              command: (event) => { this.groupAndClick(); },
+              items: [
+                {
+                  label: 'Include two search terms. Example network AND administrator'
+                }
+              ]
+            },
+          ]
+        },
+        {
           label: 'From',
         },
         {
@@ -52,26 +75,35 @@ export class QueryMenuComponent implements OnInit {
           label: 'In'
         }
       ];
-    } else {
-      this.items = [
-        {
-          label: 'And',
-          command: (event) => { this.andClick(); },
-          items: [
-            {
-              label: 'Include two search terms. Example network AND administrator'
-            }
-          ]
-        }
-      ];
-    }
+    // } else {
+    //   this.items = [
+    //     {
+    //       label: 'And',
+    //       command: (event) => { this.andClick(); },
+    //       items: [
+    //         {
+    //           label: 'Include two search terms. Example network AND administrator'
+    //         }
+    //       ]
+    //     }
+    //   ];
+    // }
   }
 
   orClick() {
     this.menuEvent.emit('or');
   }
 
+  groupOrClick() {
+    console.log('groupOr');
+    this.menuEvent.emit('groupOr');
+  }
+
   andClick() {
     this.menuEvent.emit('and');
+  }
+
+  groupAndClick() {
+    this.menuEvent.emit('groupAnd');
   }
 }
