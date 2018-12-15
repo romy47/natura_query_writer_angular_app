@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 // primeng
 import {MultiSelectModule} from 'primeng/multiselect';
 import {TieredMenuModule} from 'primeng/tieredmenu';
-
+import {OrganizationChartModule} from 'primeng/organizationchart';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -34,7 +34,8 @@ import { GroupTermsComponent } from './group-terms/group-terms.component';
     AutoCompleteModule,
     FormsModule,
     HttpClientModule,
-    TieredMenuModule
+    TieredMenuModule,
+    OrganizationChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SearchServiceService } from 'src/app/search-service.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { SearchServiceService } from 'src/app/search-service.service';
   styleUrls: ['./search-term.component.css']
 })
 export class SearchTermComponent implements OnInit {
-  text: string;
+  @Input() text: string;
   results: string[];
   constructor(private searchService: SearchServiceService) { }
 

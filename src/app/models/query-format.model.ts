@@ -4,13 +4,16 @@ export class QueryFormatModel {
 }
 
 export class QueryGroup {
+    public label = 'Root';
+    public expanded = true;
     public id: string;
     public isSingle = true;
     public verticalIndex: number;
     public horizontalIndex: number;
     public type: string;
-    public query: string;
+    public query = '';
     public queryGroups: QueryGroup[] = [];
+    public children = this.queryGroups;
 
     constructor() {
         this.id = new Date().toString();

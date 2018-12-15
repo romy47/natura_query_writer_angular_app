@@ -1,6 +1,6 @@
 <span *ngIf="group.type!=='pilot'">{{group.type}}</span>
 <span class="bordered">
-    <span *ngIf="group.isSingle" class="app-search-term"></span>
+    <span *ngIf="group.isSingle" [text]="group.query" class="app-search-term"></span>
     <span *ngFor="let group of group.queryGroups" (groupEvent)="groupEventHandle($event)" [group]="group" class="app-group-terms"></span>
     <span (menuEvent)="menuEvent($event)" [parent]="'group'" class="app-query-menu"></span>
 </span>

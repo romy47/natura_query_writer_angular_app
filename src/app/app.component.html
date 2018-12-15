@@ -10,9 +10,19 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row" style="margin-top: 200px;">
   <div class="col-sm-12">
-    
+    <p-organizationChart [value]="treeData">
+        <ng-template let-node pTemplate="or">
+            <span><span class="badge badge-primary">OR</span> {{node.query||node.label}}</span>
+        </ng-template>
+        <ng-template let-node pTemplate="and">
+            <span><span class="badge badge-info">AND</span> {{node.query||node.label}}</span>
+        </ng-template>
+        <ng-template let-node pTemplate="default">
+            {{node.query||node.label}}
+        </ng-template>
+    </p-organizationChart>
   </div>
 </div>
 <!-- <h1 style="font-size: 50px;">Show Me</h1> -->

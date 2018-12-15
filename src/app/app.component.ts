@@ -3,6 +3,7 @@ import { SelectItem } from 'primeng/api';
 import { SearchServiceService } from 'src/app/search-service.service';
 import { QueryFormatModel, QueryGroup } from 'src/app/models/query-format.model';
 import { forEach } from '@angular/router/src/utils/collection';
+import { TreeDataModel } from './models/tree-data.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,9 +11,23 @@ import { forEach } from '@angular/router/src/utils/collection';
 })
 export class AppComponent {
   componentRef: any;
+  treeData: QueryGroup[] = [];
   public queryStructure: QueryFormatModel = new QueryFormatModel();
   constructor() {
     this.createFirstGroup();
+    const parent = new QueryGroup();
+    parent.label = 'Root';
+    const child1 = new QueryGroup();
+    child1.label = 'Category';
+    const child2 = new QueryGroup();
+    child2.label = 'Search Terms';
+    child2.children = this.queryStructure.queryGroups;
+    parent.queryGroups.push(child1);
+    parent.queryGroups.push(child2);
+    // child1.label = 'Child 1';
+    // child1.expanded = true;
+    // parent.children.push(child1);
+    this.treeData.push(parent);
   }
 
   createComponent() {
@@ -36,7 +51,6 @@ export class AppComponent {
     group.verticalIndex = 0;
     group.horizontalIndex = 0;
     this.queryStructure.queryGroups.push(group);
-    console.log(this.queryStructure);
   }
 
   createOrTerm() {
@@ -45,6 +59,7 @@ export class AppComponent {
     group.verticalIndex = 0;
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     this.queryStructure.queryGroups.push(group);
+    console.log(this.queryStructure);
   }
 
   createAndTerm() {
