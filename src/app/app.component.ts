@@ -16,17 +16,15 @@ export class AppComponent {
   constructor() {
     this.createFirstGroup();
     const parent = new QueryGroup();
-    parent.label = 'Root';
+    parent.label = 'Your Search Query';
     const child1 = new QueryGroup();
     child1.label = 'Category';
+    child1.children = this.queryStructure.categories;
     const child2 = new QueryGroup();
     child2.label = 'Search Terms';
     child2.children = this.queryStructure.queryGroups;
     parent.queryGroups.push(child1);
     parent.queryGroups.push(child2);
-    // child1.label = 'Child 1';
-    // child1.expanded = true;
-    // parent.children.push(child1);
     this.treeData.push(parent);
   }
 
@@ -37,10 +35,10 @@ export class AppComponent {
   groupEventhandle(event: any) {
     switch (event.event.toLocaleLowerCase()) {
       case 'or':
-        this.createOrTerm();
+        this.createOrTerm(event.group);
         break;
       case 'and':
-        this.createAndTerm();
+        this.createAndTerm(event.group);
         break;
     }
   }
@@ -53,21 +51,22 @@ export class AppComponent {
     this.queryStructure.queryGroups.push(group);
   }
 
-  createOrTerm() {
+  createOrTerm(prevGroup: any) {
     const group = new QueryGroup();
     group.type = 'or';
     group.verticalIndex = 0;
     group.horizontalIndex = this.queryStructure.queryGroups.length;
-    this.queryStructure.queryGroups.push(group);
-    console.log(this.queryStructure);
+    const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.queryStructure.queryGroups.splice(index + 1, 0, group);
   }
 
-  createAndTerm() {
+  createAndTerm(prevGroup: any) {
     const group = new QueryGroup();
     group.type = 'and';
     group.verticalIndex = 0;
     group.horizontalIndex = this.queryStructure.queryGroups.length;
-    this.queryStructure.queryGroups.push(group);
+    const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.queryStructure.queryGroups.splice(index + 1, 0, group);
   }
 
 }

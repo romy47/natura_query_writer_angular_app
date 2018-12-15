@@ -35,10 +35,10 @@ export class GroupTermsComponent implements OnInit {
   groupEventHandle(event: any) {
     switch (event.event.toLocaleLowerCase()) {
       case 'and':
-        this.createAndTerm();
+        this.createAndTerm(event.group);
         break;
       case 'or':
-        this.createOrTerm();
+        this.createOrTerm(event.group);
         break;
     }
   }
@@ -71,19 +71,21 @@ export class GroupTermsComponent implements OnInit {
     this.group.queryGroups.push(group2);
   }
 
-  createAndTerm() {
+  createAndTerm(prevGroup: any) {
     const group = new QueryGroup();
     group.type = 'and';
     group.verticalIndex = this.group.verticalIndex + 1;
     group.horizontalIndex = this.group.queryGroups.length;
-    this.group.queryGroups.push(group);
+    const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.group.queryGroups.splice(index + 1, 0, group);
   }
 
-  createOrTerm() {
+  createOrTerm(prevGroup: any) {
     const group = new QueryGroup();
     group.type = 'or';
     group.verticalIndex = this.group.verticalIndex + 1;
     group.horizontalIndex = this.group.queryGroups.length;
-    this.group.queryGroups.push(group);
+    const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.group.queryGroups.splice(index + 1, 0, group);
   }
 }

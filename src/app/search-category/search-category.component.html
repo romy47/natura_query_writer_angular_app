@@ -1,1 +1,1 @@
-<p-multiSelect [style.top]="'10px'" [filter]="false" [options]="categories" [(ngModel)]="selectedCategories"></p-multiSelect>
+<p-multiSelect (onChange)="onSelectChange()" [style.top]="'10px'" [filter]="false" [options]="categories" [(ngModel)]="privatelySelectedCategories"></p-multiSelect>

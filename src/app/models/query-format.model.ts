@@ -1,10 +1,12 @@
+import { getGuid } from "../app.constants";
+
 export class QueryFormatModel {
-    public categories: string[] = [];
+    public categories: QueryGroup[] = [];
     public queryGroups: QueryGroup[] = [];
 }
 
 export class QueryGroup {
-    public label = 'Root';
+    public label = 'Empty';
     public expanded = true;
     public id: string;
     public isSingle = true;
@@ -16,6 +18,6 @@ export class QueryGroup {
     public children = this.queryGroups;
 
     constructor() {
-        this.id = new Date().toString();
+        this.id = getGuid();
     }
 }

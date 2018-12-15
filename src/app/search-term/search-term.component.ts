@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SearchServiceService } from 'src/app/search-service.service';
+import { QueryGroup } from '../models/query-format.model';
 
 @Component({
   selector: '.app-search-term',
@@ -7,7 +8,7 @@ import { SearchServiceService } from 'src/app/search-service.service';
   styleUrls: ['./search-term.component.css']
 })
 export class SearchTermComponent implements OnInit {
-  @Input() text: string;
+  @Input() group: QueryGroup;
   results: string[];
   constructor(private searchService: SearchServiceService) { }
 

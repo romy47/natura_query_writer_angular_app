@@ -1,28 +1,37 @@
 <app-nav-bar></app-nav-bar>
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-12" style="text-align: center; margin: 20px 0px">
     <span>
       Show me
-      <span class="app-search-category"></span>
+      <span [selectedCategories]="queryStructure.categories" class="app-search-category"></span>
       with
       <span *ngFor="let group of queryStructure.queryGroups" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-group-terms"></span>
     </span>
   </div>
 </div>
 
-<div class="row" style="margin-top: 200px;">
+<div class="row" style="padding: 0 30px;">
   <div class="col-sm-12">
-    <p-organizationChart [value]="treeData">
-        <ng-template let-node pTemplate="or">
-            <span><span class="badge badge-primary">OR</span> {{node.query||node.label}}</span>
-        </ng-template>
-        <ng-template let-node pTemplate="and">
-            <span><span class="badge badge-info">AND</span> {{node.query||node.label}}</span>
-        </ng-template>
-        <ng-template let-node pTemplate="default">
-            {{node.query||node.label}}
-        </ng-template>
-    </p-organizationChart>
+    <p-accordion>
+      <p-accordionTab header="Overview" [selected]="true">
+          <p-organizationChart [value]="treeData">
+              <ng-template let-node pTemplate="pilot">
+                <span>{{node.query||node.label}}</span>
+              </ng-template>
+              <ng-template let-node pTemplate="or">
+                <span>
+                  <span class="badge badge-primary">OR</span> {{node.query||node.label}}</span>
+              </ng-template>
+              <ng-template let-node pTemplate="and">
+                <span>
+                  <span class="badge badge-info">AND</span> {{node.query||node.label}}</span>
+              </ng-template>
+              <ng-template let-node pTemplate="default">
+                {{node.query||node.label}}
+              </ng-template>
+            </p-organizationChart>
+      </p-accordionTab>
+    </p-accordion>
   </div>
 </div>
 <!-- <h1 style="font-size: 50px;">Show Me</h1> -->
