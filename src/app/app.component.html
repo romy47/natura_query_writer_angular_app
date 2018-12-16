@@ -1,11 +1,15 @@
 <app-nav-bar></app-nav-bar>
 <div class="row">
-  <div class="col-sm-12" style="text-align: center; margin: 20px 0px">
+  <div class="col-sm-12" style="margin:10px 30px">
     <span>
       Show me
       <span [selectedCategories]="queryStructure.categories" class="app-search-category"></span>
       with
       <span *ngFor="let group of queryStructure.queryGroups" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-group-terms"></span>
+      <!-- from -->
+      <span *ngIf="queryStructure.dateFrom" (groupEvent)="groupEventhandle($event)" [group]="queryStructure.dateFrom" class="app-date-term"></span>
+      <!-- to -->
+      <span *ngIf="queryStructure.dateTo" (groupEvent)="groupEventhandle($event)" [group]="queryStructure.dateTo" class="app-date-term"></span>
     </span>
   </div>
 </div>
@@ -14,22 +18,54 @@
   <div class="col-sm-12">
     <p-accordion>
       <p-accordionTab header="Overview" [selected]="true">
-          <p-organizationChart [value]="treeData">
-              <ng-template let-node pTemplate="pilot">
-                <span>{{node.query||node.label}}</span>
-              </ng-template>
-              <ng-template let-node pTemplate="or">
-                <span>
-                  <span class="badge badge-primary">OR</span> {{node.query||node.label}}</span>
-              </ng-template>
-              <ng-template let-node pTemplate="and">
-                <span>
-                  <span class="badge badge-info">AND</span> {{node.query||node.label}}</span>
-              </ng-template>
-              <ng-template let-node pTemplate="default">
-                {{node.query||node.label}}
-              </ng-template>
-            </p-organizationChart>
+        <p-organizationChart [value]="treeData">
+          <ng-template let-node pTemplate="pilot">
+            <span>{{node.query||node.label}}</span>
+          </ng-template>
+          <ng-template let-node pTemplate="or">
+            <span>
+              <span class="badge badge-primary">OR </span>&nbsp;&nbsp;
+              <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">{{node.query||node.label}}</span>
+            </span>
+          </ng-template>
+          <ng-template let-node pTemplate="and">
+            <span>
+              <span class="badge badge-info">AND</span>&nbsp;&nbsp;
+              <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">{{node.query||node.label}}</span>
+            </span>
+          </ng-template>
+          <ng-template let-node pTemplate="pilot">
+            <span>
+              <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">{{node.query||node.label}}</span>
+            </span>
+          </ng-template>
+          <ng-template let-node pTemplate="from">
+            <span>
+              <span class="badge badge-warning">from</span>&nbsp;&nbsp;
+              <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">
+                <span *ngIf="node.query">{{node.query|date:'shortDate'}}</span>
+                <span *ngIf="!node.query">Empty</span>
+              </span>
+            </span>
+          </ng-template>
+          <ng-template let-node pTemplate="to">
+            <span>
+              <span class="badge badge-warning">to</span>&nbsp;&nbsp;
+              <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">
+                <span *ngIf="node.query">{{node.query|date:'shortDate'}}</span>
+                <span *ngIf="!node.query">Empty</span>
+              </span>
+            </span>
+          </ng-template>
+          <ng-template let-node pTemplate="group">
+            <span>
+              <span class="badge badge-secondary">Group</span>
+            </span>
+          </ng-template>
+          <ng-template let-node pTemplate="default">
+            {{node.query||node.label}}
+          </ng-template>
+        </p-organizationChart>
       </p-accordionTab>
     </p-accordion>
   </div>

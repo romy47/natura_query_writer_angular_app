@@ -10,6 +10,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { AccordionModule } from 'primeng/accordion';
+import {CalendarModule} from 'primeng/calendar';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -18,6 +19,7 @@ import { SearchCategoryComponent } from './search-category/search-category.compo
 import { SearchTermComponent } from './search-term/search-term.component';
 import { QueryMenuComponent } from './query-menu/query-menu.component';
 import { GroupTermsComponent } from './group-terms/group-terms.component';
+import { DateTermComponent } from './date-term/date-term.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { GroupTermsComponent } from './group-terms/group-terms.component';
     SearchCategoryComponent,
     SearchTermComponent,
     QueryMenuComponent,
-    GroupTermsComponent
+    GroupTermsComponent,
+    DateTermComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { GroupTermsComponent } from './group-terms/group-terms.component';
     HttpClientModule,
     TieredMenuModule,
     OrganizationChartModule,
-    AccordionModule
+    AccordionModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

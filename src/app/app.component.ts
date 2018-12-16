@@ -40,6 +40,12 @@ export class AppComponent {
       case 'and':
         this.createAndTerm(event.group);
         break;
+      case 'from':
+        this.createFromTerm(event.group);
+        break;
+      case 'to':
+        this.createToTerm(event.group);
+        break;
     }
   }
 
@@ -67,6 +73,30 @@ export class AppComponent {
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.queryStructure.queryGroups.splice(index + 1, 0, group);
+  }
+
+  createFromTerm(prevGroup: any) {
+    this.queryStructure.dateFrom = new QueryGroup();
+    this.queryStructure.dateFrom.type = 'from';
+    this.queryStructure.dateFrom.verticalIndex = 0;
+    this.queryStructure.dateFrom.horizontalIndex = 997;
+
+    const child3 = new QueryGroup();
+    child3.label = 'From Date';
+    child3.children.push(this.queryStructure.dateFrom);
+    this.treeData[0].children.push(child3);
+  }
+
+  createToTerm(prevGroup: any) {
+    this.queryStructure.dateTo = new QueryGroup();
+    this.queryStructure.dateTo.type = 'to';
+    this.queryStructure.dateTo.verticalIndex = 0;
+    this.queryStructure.dateTo.horizontalIndex = 998;
+
+    const child4 = new QueryGroup();
+    child4.label = 'To Date';
+    child4.children.push(this.queryStructure.dateTo);
+    this.treeData[0].children.push(child4);
   }
 
 }

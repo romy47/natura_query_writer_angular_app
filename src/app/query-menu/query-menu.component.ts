@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { QueryGroup } from '../models/query-format.model';
 
 @Component({
   selector: '.app-query-menu',
@@ -8,7 +9,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class QueryMenuComponent implements OnInit {
   @Output() menuEvent: EventEmitter<string> = new EventEmitter<string>();
-  @Input() parent = 'app';
+  @Input() group: QueryGroup;
   constructor() { }
 
   items: MenuItem[];
@@ -67,9 +68,11 @@ export class QueryMenuComponent implements OnInit {
         },
         {
           label: 'From',
+          command: (event) => { this.fromClick(); },
         },
         {
-          label: 'To'
+          label: 'To',
+          command: (event) => { this.toClick(); },
         },
         {
           label: 'In'
@@ -95,7 +98,6 @@ export class QueryMenuComponent implements OnInit {
   }
 
   groupOrClick() {
-    console.log('groupOr');
     this.menuEvent.emit('groupOr');
   }
 
@@ -105,5 +107,13 @@ export class QueryMenuComponent implements OnInit {
 
   groupAndClick() {
     this.menuEvent.emit('groupAnd');
+  }
+
+  fromClick() {
+    this.menuEvent.emit('from');
+  }
+
+  toClick() {
+    this.menuEvent.emit('to');
   }
 }

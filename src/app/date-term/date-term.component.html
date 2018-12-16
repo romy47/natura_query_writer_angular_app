@@ -1,0 +1,5 @@
+<span>{{group.type}}</span>
+<span class="bordered">
+    <p-calendar [(ngModel)]="group.query"></p-calendar>
+</span>
+<span (menuEvent)="menuEvent($event)" [group]="group" class="app-query-menu"></span>

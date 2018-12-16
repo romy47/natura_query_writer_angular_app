@@ -1,0 +1,22 @@
+:host {
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.bordered {
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.border-style {
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+}
+
+.bordered span{
+    /* padding-right: 5px; */
+}

@@ -3,6 +3,10 @@ import { getGuid } from "../app.constants";
 export class QueryFormatModel {
     public categories: QueryGroup[] = [];
     public queryGroups: QueryGroup[] = [];
+    public dateFrom: QueryGroup;
+    public dateTo: QueryGroup;
+    public language: QueryGroup[] = [];
+    public places: QueryGroup[] = [];
 }
 
 export class QueryGroup {
@@ -10,10 +14,10 @@ export class QueryGroup {
     public expanded = true;
     public id: string;
     public isSingle = true;
-    public verticalIndex: number;
+    public verticalIndex = 0;
     public horizontalIndex: number;
     public type: string;
-    public query = '';
+    public query: any;
     public queryGroups: QueryGroup[] = [];
     public children = this.queryGroups;
 

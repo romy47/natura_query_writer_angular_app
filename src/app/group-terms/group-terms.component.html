@@ -3,4 +3,4 @@
     <span *ngIf="group.isSingle" [group]="group" class="app-search-term"></span>
     <span *ngFor="let group of group.queryGroups" (groupEvent)="groupEventHandle($event)" [group]="group" class="app-group-terms"></span>
 </span>
-<span (menuEvent)="menuEvent($event)" [parent]="'group'" class="app-query-menu"></span>
+<span (menuEvent)="menuEvent($event)" [group]="group" class="app-query-menu"></span>
