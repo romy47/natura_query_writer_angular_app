@@ -23,8 +23,13 @@ export class AppComponent {
     const child2 = new QueryGroup();
     child2.label = 'Search Terms';
     child2.children = this.queryStructure.queryGroups;
+    const child3 = new QueryGroup();
+    child3.label = 'Date Filter';
+    child3.type = 'date';
+    child3.children = this.queryStructure.date;
     parent.queryGroups.push(child1);
     parent.queryGroups.push(child2);
+    parent.queryGroups.push(child3);
     this.treeData.push(parent);
   }
 
@@ -76,27 +81,19 @@ export class AppComponent {
   }
 
   createFromTerm(prevGroup: any) {
-    this.queryStructure.dateFrom = new QueryGroup();
-    this.queryStructure.dateFrom.type = 'from';
-    this.queryStructure.dateFrom.verticalIndex = 0;
-    this.queryStructure.dateFrom.horizontalIndex = 997;
-
-    const child3 = new QueryGroup();
-    child3.label = 'From Date';
-    child3.children.push(this.queryStructure.dateFrom);
-    this.treeData[0].children.push(child3);
+    const child = new QueryGroup();
+    child.type = 'from';
+    child.verticalIndex = 0;
+    child.horizontalIndex = 997;
+    this.queryStructure.date.push(child);
   }
 
   createToTerm(prevGroup: any) {
-    this.queryStructure.dateTo = new QueryGroup();
-    this.queryStructure.dateTo.type = 'to';
-    this.queryStructure.dateTo.verticalIndex = 0;
-    this.queryStructure.dateTo.horizontalIndex = 998;
-
-    const child4 = new QueryGroup();
-    child4.label = 'To Date';
-    child4.children.push(this.queryStructure.dateTo);
-    this.treeData[0].children.push(child4);
+    const child = new QueryGroup();
+    child.type = 'to';
+    child.verticalIndex = 0;
+    child.horizontalIndex = 998;
+    this.queryStructure.date.push(child);
   }
 
 }

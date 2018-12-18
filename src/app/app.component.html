@@ -7,9 +7,9 @@
       with
       <span *ngFor="let group of queryStructure.queryGroups" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-group-terms"></span>
       <!-- from -->
-      <span *ngIf="queryStructure.dateFrom" (groupEvent)="groupEventhandle($event)" [group]="queryStructure.dateFrom" class="app-date-term"></span>
+      <span *ngFor="let group of queryStructure.date" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-date-term"></span>
       <!-- to -->
-      <span *ngIf="queryStructure.dateTo" (groupEvent)="groupEventhandle($event)" [group]="queryStructure.dateTo" class="app-date-term"></span>
+      <!-- <span *ngIf="queryStructure.dateTo" (groupEvent)="groupEventhandle($event)" [group]="queryStructure.dateTo" class="app-date-term"></span> -->
     </span>
   </div>
 </div>

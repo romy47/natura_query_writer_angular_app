@@ -5,6 +5,7 @@ export class QueryFormatModel {
     public queryGroups: QueryGroup[] = [];
     public dateFrom: QueryGroup;
     public dateTo: QueryGroup;
+    public date: QueryGroup[] = [];
     public language: QueryGroup[] = [];
     public places: QueryGroup[] = [];
 }
