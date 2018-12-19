@@ -45,6 +45,9 @@ export class AppComponent {
       case 'and':
         this.createAndTerm(event.group);
         break;
+      case 'not':
+        this.createNotTerm(event.group);
+        break;
       case 'from':
         this.createFromTerm(event.group);
         break;
@@ -74,6 +77,15 @@ export class AppComponent {
   createAndTerm(prevGroup: any) {
     const group = new QueryGroup();
     group.type = 'and';
+    group.verticalIndex = 0;
+    group.horizontalIndex = this.queryStructure.queryGroups.length;
+    const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.queryStructure.queryGroups.splice(index + 1, 0, group);
+  }
+
+  createNotTerm (prevGroup: any) {
+    const group = new QueryGroup();
+    group.type = 'not';
     group.verticalIndex = 0;
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);

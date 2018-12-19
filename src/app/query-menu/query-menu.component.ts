@@ -37,6 +37,7 @@ export class QueryMenuComponent implements OnInit {
         },
         {
           label: 'Not',
+          command: (event) => { this.notClick(); },
           items: [
             {
               label: ' Use to exclude a specific term. Example: administrator NOT manager'
@@ -95,6 +96,10 @@ export class QueryMenuComponent implements OnInit {
 
   orClick() {
     this.menuEvent.emit('or');
+  }
+
+  notClick() {
+    this.menuEvent.emit('not');
   }
 
   groupOrClick() {

@@ -34,6 +34,12 @@
               <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">{{node.query||node.label}}</span>
             </span>
           </ng-template>
+          <ng-template let-node pTemplate="not">
+            <span>
+              <span class="badge badge-danger">NOT</span>&nbsp;&nbsp;
+              <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">{{node.query||node.label}}</span>
+            </span>
+          </ng-template>
           <ng-template let-node pTemplate="pilot">
             <span>
               <span style="border: 1px solid #73e686; border-radius: 5px; padding: 3px;">{{node.query||node.label}}</span>
