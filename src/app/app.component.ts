@@ -54,6 +54,9 @@ export class AppComponent {
       case 'to':
         this.createToTerm(event.group);
         break;
+      case 'delete':
+        this.deleteTerm(event.group);
+        break;
     }
   }
 
@@ -72,6 +75,11 @@ export class AppComponent {
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.queryStructure.queryGroups.splice(index + 1, 0, group);
+  }
+
+  deleteTerm(prevGroup: any) {
+    const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.queryStructure.queryGroups.splice(index, 1);
   }
 
   createAndTerm(prevGroup: any) {

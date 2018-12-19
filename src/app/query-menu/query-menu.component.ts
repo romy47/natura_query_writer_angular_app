@@ -68,12 +68,21 @@ export class QueryMenuComponent implements OnInit {
           ]
         },
         {
-          label: 'From',
-          command: (event) => { this.fromClick(); },
+          label: 'Date',
+          items: [
+            {
+              label: 'From',
+              command: (event) => { this.fromClick(); },
+            },
+            {
+              label: 'To',
+              command: (event) => { this.toClick(); },
+            },
+          ]
         },
         {
-          label: 'To',
-          command: (event) => { this.toClick(); },
+          label: 'Delete',
+          command: (event) => { this.deleteClick(); }
         },
         {
           label: 'In'
@@ -100,6 +109,10 @@ export class QueryMenuComponent implements OnInit {
 
   notClick() {
     this.menuEvent.emit('not');
+  }
+
+  deleteClick() {
+    this.menuEvent.emit('delete');
   }
 
   groupOrClick() {

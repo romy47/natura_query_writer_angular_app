@@ -32,6 +32,9 @@ export class GroupTermsComponent implements OnInit {
       case 'to':
         this.groupEvent.emit({ group: this.group, event: event });
         break;
+      case 'delete':
+        this.groupEvent.emit({ group: this.group, event: event });
+        break;
       case 'groupand':
         this.groupAndTerm();
         break;
@@ -51,6 +54,9 @@ export class GroupTermsComponent implements OnInit {
         break;
       case 'not':
         this.createNotTerm(event.group);
+        break;
+      case 'delete':
+        this.deleteTerm(event.group);
         break;
       case 'from':
         this.groupEvent.emit({ group: this.group, event: event });
@@ -101,6 +107,12 @@ export class GroupTermsComponent implements OnInit {
     const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.group.queryGroups.splice(index + 1, 0, group);
   }
+
+  deleteTerm(prevGroup: any) {
+    const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
+    this.group.queryGroups.splice(index, 1);
+  }
+
 
   createNotTerm (prevGroup: any) {
     const group = new QueryGroup();
