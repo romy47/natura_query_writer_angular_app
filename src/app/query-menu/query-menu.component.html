@@ -1,5 +1,5 @@
 <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
 <!-- <button *ngIf="parent=='app'" class="btn btn-info" #btn parent="button" pButton icon="fa fa fa-fw fa-list" label="Show" (click)="menu.toggle($event)"><i class="fa fa-plus"></i></button> -->
-<button *ngIf="group.verticalIndex==0" class="btn btn-sm btn-success" #btn type="button" (click)="menu.toggle($event)"><i class="fa fa-plus"></i></button>
+<button *ngIf="group.verticalIndex==0" class="btn btn-sm btn-success" #btn type="button" (click)="toggleMenu($event)" (click)="menu.toggle($event)"><i class="fa fa-plus"></i></button>
 <button *ngIf="group.verticalIndex!=0" class="btn btn-xs btn-info"  #btn type="button" (click)="menu.toggle($event)"><i class="fa fa-plus"></i></button>
  

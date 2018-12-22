@@ -71,6 +71,7 @@ export class GroupTermsComponent implements OnInit {
     this.group.isSingle = false;
     const group1 = new QueryGroup();
     group1.type = 'pilot';
+    group1.query = this.group.query;
     group1.verticalIndex = this.group.verticalIndex + 1;
     group1.horizontalIndex = this.group.queryGroups.length;
     const group2 = new QueryGroup();
@@ -87,6 +88,7 @@ export class GroupTermsComponent implements OnInit {
     this.group.isSingle = false;
     const group1 = new QueryGroup();
     group1.type = 'pilot';
+    group1.query = this.group.query;
     group1.verticalIndex = this.group.verticalIndex + 1;
     group1.horizontalIndex = this.group.queryGroups.length;
     const group2 = new QueryGroup();

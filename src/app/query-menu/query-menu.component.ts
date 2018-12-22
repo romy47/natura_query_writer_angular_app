@@ -15,17 +15,39 @@ export class QueryMenuComponent implements OnInit {
   items: MenuItem[];
 
   ngOnInit() {
-    // if (this.parent === 'app') {
-      this.items = [
-        {
-          label: 'Or',
-          command: (event) => { this.orClick(); },
-          items: [
-            {
-              label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
-            }
-          ]
-        },
+    this.buildMenu();
+  }
+
+  buildMenu() {
+    this.items = [
+      {
+        label: 'Date',
+        items: [
+          {
+            label: 'From',
+            command: (event) => { this.fromClick(); },
+          },
+          {
+            label: 'To',
+            command: (event) => { this.toClick(); },
+          },
+        ]
+      },
+      {
+        label: 'In'
+      }
+    ];
+
+    if (this.isQueryAble()) {
+      this.items.push({
+        label: 'Or',
+        command: (event) => { this.orClick(); },
+        items: [
+          {
+            label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
+          }
+        ]
+      },
         {
           label: 'And',
           command: (event) => { this.andClick(); },
@@ -43,68 +65,48 @@ export class QueryMenuComponent implements OnInit {
               label: ' Use to exclude a specific term. Example: administrator NOT manager'
             }
           ]
-        },
-        {
-          label: 'Group',
-          items: [
-            {
-              label: 'Or',
-              command: (event) => { this.groupOrClick(); },
-              items: [
-                {
-                  label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
-                }
-              ]
-            },
-            {
-              label: 'And',
-              command: (event) => { this.groupAndClick(); },
-              items: [
-                {
-                  label: 'Include two search terms. Example network AND administrator'
-                }
-              ]
-            },
-          ]
-        },
-        {
-          label: 'Date',
-          items: [
-            {
-              label: 'From',
-              command: (event) => { this.fromClick(); },
-            },
-            {
-              label: 'To',
-              command: (event) => { this.toClick(); },
-            },
-          ]
-        },
-        {
-          label: 'Delete',
-          command: (event) => { this.deleteClick(); }
-        },
-        {
-          label: 'In'
-        }
-      ];
-    // } else {
-    //   this.items = [
-    //     {
-    //       label: 'And',
-    //       command: (event) => { this.andClick(); },
-    //       items: [
-    //         {
-    //           label: 'Include two search terms. Example network AND administrator'
-    //         }
-    //       ]
-    //     }
-    //   ];
-    // }
+        });
+    }
+    if (this.isGroupable()) {
+      this.items.push({
+        label: 'Group',
+        items: [
+          {
+            label: 'Or',
+            command: (event) => { this.groupOrClick(); },
+            items: [
+              {
+                label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
+              }
+            ]
+          },
+          {
+            label: 'And',
+            command: (event) => { this.groupAndClick(); },
+            items: [
+              {
+                label: 'Include two search terms. Example network AND administrator'
+              }
+            ]
+          },
+        ]
+      });
+    }
+    if (this.isDeletable()) {
+      this.items.push({
+        label: 'Delete',
+        command: (event) => { this.deleteClick(); }
+      });
+    }
   }
 
   orClick() {
     this.menuEvent.emit('or');
+  }
+
+  toggleMenu(event: any) {
+    // console.log(event);
+    this.buildMenu();
   }
 
   notClick() {
@@ -133,5 +135,17 @@ export class QueryMenuComponent implements OnInit {
 
   toClick() {
     this.menuEvent.emit('to');
+  }
+
+  isDeletable(): boolean {
+    return this.group.type !== 'pilot';
+  }
+
+  isGroupable(): boolean {
+    return this.group.isSingle;
+  }
+
+  isQueryAble(): boolean {
+    return (this.group.type !== 'date' && this.group.type !== 'from' && this.group.type !== 'to');
   }
 }

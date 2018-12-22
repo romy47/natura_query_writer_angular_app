@@ -65,6 +65,7 @@ export class AppComponent {
     group.type = 'pilot';
     group.verticalIndex = 0;
     group.horizontalIndex = 0;
+    group.isSingle = true;
     this.queryStructure.queryGroups.push(group);
   }
 
