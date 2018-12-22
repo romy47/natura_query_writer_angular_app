@@ -76,7 +76,7 @@ export class GroupTermsComponent implements OnInit {
     group1.horizontalIndex = this.group.queryGroups.length;
     const group2 = new QueryGroup();
     group2.type = 'or';
-    group2.verticalIndex = this.group.verticalIndex + 1;
+    group2.verticalIndex = this.group.verticalIndex + 2;
     group2.horizontalIndex = this.group.queryGroups.length;
     this.group.queryGroups.push(group1);
     this.group.queryGroups.push(group2);
@@ -93,7 +93,7 @@ export class GroupTermsComponent implements OnInit {
     group1.horizontalIndex = this.group.queryGroups.length;
     const group2 = new QueryGroup();
     group2.type = 'and';
-    group2.verticalIndex = this.group.verticalIndex + 1;
+    group2.verticalIndex = this.group.verticalIndex + 2;
     group2.horizontalIndex = this.group.queryGroups.length;
     this.group.queryGroups.push(group1);
     this.group.queryGroups.push(group2);

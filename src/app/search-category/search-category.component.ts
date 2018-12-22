@@ -11,40 +11,52 @@ import { QueryGroup } from '../models/query-format.model';
 export class SearchCategoryComponent implements OnInit {
 
   categories: SelectItem[];
-  @Input() selectedCategories: QueryGroup[];
-  privatelySelectedCategories: QueryGroup[];
+  @Input() selectedCategories: QueryGroup[] = [];
+  privatelySelectedCategories: QueryGroup[] = [];
 
   constructor() {
+  }
+
+  ngOnInit() {
+    const cate0 = new QueryGroup();
+    cate0.label = 'Books';
     const cate1 = new QueryGroup();
     cate1.label = 'Image';
     const cate2 = new QueryGroup();
     cate2.label = 'News';
     const cate3 = new QueryGroup();
     cate3.label = 'Video';
-    const cate4 = new QueryGroup();
-    cate4.label = 'Book';
     this.categories = [
+      { label: 'Books', value: cate0 },
       { label: 'Image', value: cate1 },
       { label: 'News', value: cate2 },
-      { label: 'Video', value: cate3 },
-      { label: 'Book', value: cate4 }
+      { label: 'Video', value: cate3 }
     ];
-  }
 
-  ngOnInit() {
-  }
-
-  onSelectChange() {
-    this.selectedCategories.length = 0;
-
-    this.privatelySelectedCategories.forEach(element => {
-      // tslint:disable-next-line:max-line-length
-      if (this.selectedCategories.filter(item => item.label.toLowerCase() === element.label.toLowerCase()).length === 0) {
-        this.selectedCategories.push(element);
-      }
+    this.categories.forEach(element => {
+      this.selectedCategories.push(element.value);
+      this.privatelySelectedCategories.push(element.value);
     });
   }
 
+  onSelectChange(val: any) {
+    // console.log(val.value);
+    this.selectedCategories.length = 0;
+
+    if (this.privatelySelectedCategories.length === 0) {
+      this.privatelySelectedCategories = [];
+      this.categories.forEach(element => {
+        this.selectedCategories.push(element.value);
+        this.privatelySelectedCategories.push(element.value);
+      });
+    } else {
+      this.privatelySelectedCategories.forEach(element => {
+        if (this.selectedCategories.filter(item => item.label.toLowerCase() === element.label.toLowerCase()).length === 0) {
+          this.selectedCategories.push(element);
+        }
+      });
+    }
+  }
 }
 
 interface City {

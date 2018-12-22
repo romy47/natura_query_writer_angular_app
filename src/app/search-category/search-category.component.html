@@ -1,1 +1,15 @@
-<p-multiSelect (onChange)="onSelectChange()" [style.top]="'10px'" [filter]="false" [options]="categories" [(ngModel)]="privatelySelectedCategories"></p-multiSelect>
+<p-multiSelect [maxSelectedLabels]="3" (onChange)="onSelectChange($event)" [style.top]="'10px'" [panelStyle]="{minWidth:'12em'}"
+    [filter]="false" [options]="categories" [(ngModel)]="privatelySelectedCategories">
+    <ng-template let-value pTemplate="selectedItems">
+        <span *ngIf="value && value.length <=3">
+            <span *ngFor="let val of value;let i=index" class="ui-multiselected-item-token ui-corner-all">
+                <span>{{(i>0)?', ':''}} {{val.label}}</span>
+            </span>
+        </span>
+        <span *ngIf="!value || value.length === 0" class="ui-multiselected-empty-token ui-corner-all">Everything</span>
+        <span *ngIf="value && value.length >3" class="ui-multiselected-empty-token ui-corner-all">Everything</span>
+    </ng-template>
+    <ng-template let-car pTemplate="item">
+        <div style="font-size:14px;float:right;margin-top:4px">{{car.label}}</div>
+    </ng-template>
+</p-multiSelect>

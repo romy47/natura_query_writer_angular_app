@@ -105,7 +105,7 @@ export class QueryMenuComponent implements OnInit {
   }
 
   toggleMenu(event: any) {
-    // console.log(event);
+    console.log(this.group);
     this.buildMenu();
   }
 
