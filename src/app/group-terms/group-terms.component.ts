@@ -39,6 +39,9 @@ export class GroupTermsComponent implements OnInit {
       case 'groupand':
         this.groupAndTerm();
         break;
+      case 'groupnot':
+        this.groupNotTerm();
+        break;
       case 'groupor':
         this.groupOrTerm();
         break;
@@ -88,6 +91,24 @@ export class GroupTermsComponent implements OnInit {
     this.group.label = 'group';
     this.group.type = 'group';
     this.updateEvent.emit('groupand');
+  }
+
+  groupNotTerm() {
+    this.group.isSingle = false;
+    const group1 = new QueryGroup();
+    group1.type = 'pilot';
+    group1.query = this.group.query;
+    group1.verticalIndex = this.group.verticalIndex + 1;
+    group1.horizontalIndex = this.group.queryGroups.length;
+    const group2 = new QueryGroup();
+    group2.type = 'not';
+    group2.verticalIndex = this.group.verticalIndex + 2;
+    group2.horizontalIndex = this.group.queryGroups.length;
+    this.group.queryGroups.push(group1);
+    this.group.queryGroups.push(group2);
+    this.group.label = 'group';
+    this.group.type = 'group';
+    this.updateEvent.emit('groupnot');
   }
 
   groupAndTerm() {

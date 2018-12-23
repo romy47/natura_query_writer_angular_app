@@ -14,7 +14,7 @@ export class QueryMenuComponent implements OnInit {
   rootObject: QueryFormatModel;
   constructor(private searchService: SearchServiceService) { }
 
-  items: MenuItem[];
+  items: MenuItem[] = [];
 
   ngOnInit() {
     this.searchService.rootDataObject$.subscribe(root => {
@@ -23,16 +23,75 @@ export class QueryMenuComponent implements OnInit {
         console.log('root-', root);
       }
     });
-    this.buildMenu();
+    // this.buildMenu();
   }
 
   buildMenu() {
-    this.items = [
-      {
-        label: 'In'
-      }
-    ];
-
+    this.items = [];
+    if (this.isQueryAble()) {
+      this.items.push(
+        {
+          label: 'And',
+          command: (event) => { this.andClick(); },
+          items: [
+            {
+              label: 'Include two search terms. Example network AND administrator'
+            }
+          ]
+        });
+        this.items.push({
+          label: 'Or',
+          command: (event) => { this.orClick(); },
+          items: [
+            {
+              label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
+            }
+          ]
+        });
+        this.items.push({
+          label: 'Not',
+          command: (event) => { this.notClick(); },
+          items: [
+            {
+              label: ' Use to exclude a specific term. Example: administrator NOT manager'
+            }
+          ]
+        });
+    }
+    if (this.isGroupable()) {
+      this.items.push({
+        label: 'Group',
+        items: [
+          {
+            label: 'And',
+            command: (event) => { this.groupAndClick(); },
+            items: [
+              {
+                label: 'Include two search terms. Example network AND administrator'
+              }
+            ]
+          },
+          {
+            label: 'Or',
+            command: (event) => { this.groupOrClick(); },
+            items: [
+              {
+                label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
+              }
+            ]
+          },
+          {
+            label: 'Not',
+            command: (event) => { this.groupNotClick(); },
+            items: [
+              {
+                label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
+              }
+            ]
+          }
+        ]
+      });
+    }
     if (this.isDateFilterable()) {
       const date = {
         label: 'Date',
@@ -53,67 +112,17 @@ export class QueryMenuComponent implements OnInit {
       }
       this.items.push(date);
     }
-
-    if (this.isQueryAble()) {
-      this.items.push({
-        label: 'Or',
-        command: (event) => { this.orClick(); },
-        items: [
-          {
-            label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
-          }
-        ]
-      },
-        {
-          label: 'And',
-          command: (event) => { this.andClick(); },
-          items: [
-            {
-              label: 'Include two search terms. Example network AND administrator'
-            }
-          ]
-        },
-        {
-          label: 'Not',
-          command: (event) => { this.notClick(); },
-          items: [
-            {
-              label: ' Use to exclude a specific term. Example: administrator NOT manager'
-            }
-          ]
-        });
-    }
-    if (this.isGroupable()) {
-      this.items.push({
-        label: 'Group',
-        items: [
-          {
-            label: 'Or',
-            command: (event) => { this.groupOrClick(); },
-            items: [
-              {
-                label: 'Broaden your search with multiple terms. Example: "network administrator" OR "network manager"'
-              }
-            ]
-          },
-          {
-            label: 'And',
-            command: (event) => { this.groupAndClick(); },
-            items: [
-              {
-                label: 'Include two search terms. Example network AND administrator'
-              }
-            ]
-          },
-        ]
-      });
-    }
     if (this.isDeletable()) {
       this.items.push({
         label: 'Delete',
         command: (event) => { this.deleteClick(); }
       });
     }
+    // this.items = [
+    //   {
+    //     label: 'In'
+    //   }
+    // ];
   }
 
   orClick() {
@@ -135,6 +144,10 @@ export class QueryMenuComponent implements OnInit {
 
   groupOrClick() {
     this.menuEvent.emit('groupOr');
+  }
+
+  groupNotClick() {
+    this.menuEvent.emit('groupNot');
   }
 
   andClick() {
