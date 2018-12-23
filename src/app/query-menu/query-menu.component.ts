@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { QueryGroup } from '../models/query-format.model';
+import { QueryGroup, QueryFormatModel } from '../models/query-format.model';
+import { SearchServiceService } from '../search-service.service';
 
 @Component({
   selector: '.app-query-menu',
@@ -10,33 +11,48 @@ import { QueryGroup } from '../models/query-format.model';
 export class QueryMenuComponent implements OnInit {
   @Output() menuEvent: EventEmitter<string> = new EventEmitter<string>();
   @Input() group: QueryGroup;
-  constructor() { }
+  rootObject: QueryFormatModel;
+  constructor(private searchService: SearchServiceService) { }
 
   items: MenuItem[];
 
   ngOnInit() {
+    this.searchService.rootDataObject$.subscribe(root => {
+      if (root) {
+        this.rootObject = root;
+        console.log('root-', root);
+      }
+    });
     this.buildMenu();
   }
 
   buildMenu() {
     this.items = [
       {
-        label: 'Date',
-        items: [
-          {
-            label: 'From',
-            command: (event) => { this.fromClick(); },
-          },
-          {
-            label: 'To',
-            command: (event) => { this.toClick(); },
-          },
-        ]
-      },
-      {
         label: 'In'
       }
     ];
+
+    if (this.isDateFilterable()) {
+      const date = {
+        label: 'Date',
+        items: [] = []
+      };
+
+      if (this.isFromDateFilterable()) {
+        date.items.push({
+          label: 'From',
+          command: (event) => { this.fromClick(); },
+        });
+      }
+      if (this.isToDateFilterable()) {
+        date.items.push({
+          label: 'To',
+          command: (event) => { this.toClick(); },
+        });
+      }
+      this.items.push(date);
+    }
 
     if (this.isQueryAble()) {
       this.items.push({
@@ -147,5 +163,17 @@ export class QueryMenuComponent implements OnInit {
 
   isQueryAble(): boolean {
     return (this.group.type !== 'date' && this.group.type !== 'from' && this.group.type !== 'to');
+  }
+
+  isDateFilterable(): boolean {
+    return (this.group.verticalIndex === 0) && (this.rootObject.date.length < 2);
+  }
+
+  isFromDateFilterable(): boolean {
+    return (this.rootObject.date.findIndex(date => date.type === 'from') === -1);
+  }
+
+  isToDateFilterable(): boolean {
+    return (this.rootObject.date.findIndex(date => date.type === 'to') === -1);
   }
 }

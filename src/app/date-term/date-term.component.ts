@@ -9,6 +9,8 @@ import { QueryGroup } from '../models/query-format.model';
 export class DateTermComponent implements OnInit {
   @Input() group: QueryGroup;
   @Output() groupEvent: EventEmitter<{ group: QueryGroup, event: string }> = new EventEmitter<{ group: QueryGroup, event: string }>();
+  @Output() updateEvent: EventEmitter<string> = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
@@ -17,6 +19,7 @@ export class DateTermComponent implements OnInit {
 
   menuEvent(event: string) {
     this.groupEvent.emit({ group: this.group, event: event });
+    this.updateEvent.emit('date');
   }
 
 }

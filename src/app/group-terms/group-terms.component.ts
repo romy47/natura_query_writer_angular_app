@@ -9,6 +9,7 @@ import { QueryGroup } from '../models/query-format.model';
 export class GroupTermsComponent implements OnInit {
   @Input() group: QueryGroup;
   @Output() groupEvent: EventEmitter<{ group: QueryGroup, event: string }> = new EventEmitter<{ group: QueryGroup, event: string }>();
+  @Output() updateEvent: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() {
@@ -67,6 +68,10 @@ export class GroupTermsComponent implements OnInit {
     }
   }
 
+  updateRootObject(event: any) {
+    this.updateEvent.emit(event);
+  }
+
   groupOrTerm() {
     this.group.isSingle = false;
     const group1 = new QueryGroup();
@@ -82,6 +87,7 @@ export class GroupTermsComponent implements OnInit {
     this.group.queryGroups.push(group2);
     this.group.label = 'group';
     this.group.type = 'group';
+    this.updateEvent.emit('groupand');
   }
 
   groupAndTerm() {
@@ -99,6 +105,7 @@ export class GroupTermsComponent implements OnInit {
     this.group.queryGroups.push(group2);
     this.group.label = 'group';
     this.group.type = 'group';
+    this.updateEvent.emit('groupor');
   }
 
   createAndTerm(prevGroup: any) {
@@ -108,21 +115,24 @@ export class GroupTermsComponent implements OnInit {
     group.horizontalIndex = this.group.queryGroups.length;
     const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.group.queryGroups.splice(index + 1, 0, group);
+    this.updateEvent.emit('and');
   }
 
   deleteTerm(prevGroup: any) {
     const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.group.queryGroups.splice(index, 1);
+    this.updateEvent.emit('delete');
   }
 
 
-  createNotTerm (prevGroup: any) {
+  createNotTerm(prevGroup: any) {
     const group = new QueryGroup();
     group.type = 'not';
     group.verticalIndex = this.group.verticalIndex + 1;
     group.horizontalIndex = this.group.queryGroups.length;
     const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.group.queryGroups.splice(index + 1, 0, group);
+    this.updateEvent.emit('not');
   }
 
   createOrTerm(prevGroup: any) {
@@ -132,5 +142,6 @@ export class GroupTermsComponent implements OnInit {
     group.horizontalIndex = this.group.queryGroups.length;
     const index = this.group.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.group.queryGroups.splice(index + 1, 0, group);
+    this.updateEvent.emit('or');
   }
 }

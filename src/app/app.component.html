@@ -3,11 +3,11 @@
   <div class="col-sm-12" style="margin:10px 30px">
     <span>
       Show me
-      <span [selectedCategories]="queryStructure.categories" class="app-search-category"></span>
+      <span (updateEvent)="updateRootObject($event)" [selectedCategories]="queryStructure.categories" class="app-search-category"></span>
       with
-      <span *ngFor="let group of queryStructure.queryGroups" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-group-terms"></span>
+      <span *ngFor="let group of queryStructure.queryGroups" (updateEvent)="updateRootObject($event)" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-group-terms"></span>
       <!-- from -->
-      <span *ngFor="let group of queryStructure.date" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-date-term"></span>
+      <span *ngFor="let group of queryStructure.date" (updateEvent)="updateRootObject($event)" (groupEvent)="groupEventhandle($event)" [group]="group" class="app-date-term"></span>
       <!-- to -->
       <!-- <span *ngIf="queryStructure.dateTo" (groupEvent)="groupEventhandle($event)" [group]="queryStructure.dateTo" class="app-date-term"></span> -->
     </span>

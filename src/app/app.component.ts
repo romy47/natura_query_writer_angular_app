@@ -13,7 +13,7 @@ export class AppComponent {
   componentRef: any;
   treeData: QueryGroup[] = [];
   public queryStructure: QueryFormatModel = new QueryFormatModel();
-  constructor() {
+  constructor(private searchService: SearchServiceService) {
     this.createFirstGroup();
     const parent = new QueryGroup();
     parent.label = 'Your Search Query';
@@ -67,6 +67,7 @@ export class AppComponent {
     group.horizontalIndex = 0;
     group.isSingle = true;
     this.queryStructure.queryGroups.push(group);
+    this.updateRootObject('pilot');
   }
 
   createOrTerm(prevGroup: any) {
@@ -76,11 +77,13 @@ export class AppComponent {
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.queryStructure.queryGroups.splice(index + 1, 0, group);
+    this.updateRootObject('or');
   }
 
   deleteTerm(prevGroup: any) {
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.queryStructure.queryGroups.splice(index, 1);
+    this.updateRootObject('delete');
   }
 
   createAndTerm(prevGroup: any) {
@@ -90,6 +93,7 @@ export class AppComponent {
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.queryStructure.queryGroups.splice(index + 1, 0, group);
+    this.updateRootObject('and');
   }
 
   createNotTerm (prevGroup: any) {
@@ -99,6 +103,7 @@ export class AppComponent {
     group.horizontalIndex = this.queryStructure.queryGroups.length;
     const index = this.queryStructure.queryGroups.findIndex(item => item.id === prevGroup.id);
     this.queryStructure.queryGroups.splice(index + 1, 0, group);
+    this.updateRootObject('not');
   }
 
   createFromTerm(prevGroup: any) {
@@ -107,6 +112,7 @@ export class AppComponent {
     child.verticalIndex = 0;
     child.horizontalIndex = 997;
     this.queryStructure.date.push(child);
+    this.updateRootObject('from');
   }
 
   createToTerm(prevGroup: any) {
@@ -115,6 +121,12 @@ export class AppComponent {
     child.verticalIndex = 0;
     child.horizontalIndex = 998;
     this.queryStructure.date.push(child);
+    this.updateRootObject('to');
+  }
+
+  updateRootObject(event: any) {
+    console.log('update called');
+    this.searchService.updateRootObject(this.queryStructure);
   }
 
 }

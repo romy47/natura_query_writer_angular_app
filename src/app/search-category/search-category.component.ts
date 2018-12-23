@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { SearchServiceService } from 'src/app/search-service.service';
 import { QueryGroup } from '../models/query-format.model';
@@ -12,6 +12,7 @@ export class SearchCategoryComponent implements OnInit {
 
   categories: SelectItem[];
   @Input() selectedCategories: QueryGroup[] = [];
+  @Output() updateEvent: EventEmitter<string> = new EventEmitter<string>();
   privatelySelectedCategories: QueryGroup[] = [];
 
   constructor() {
@@ -40,9 +41,7 @@ export class SearchCategoryComponent implements OnInit {
   }
 
   onSelectChange(val: any) {
-    // console.log(val.value);
     this.selectedCategories.length = 0;
-
     if (this.privatelySelectedCategories.length === 0) {
       this.privatelySelectedCategories = [];
       this.categories.forEach(element => {
@@ -56,6 +55,7 @@ export class SearchCategoryComponent implements OnInit {
         }
       });
     }
+    this.updateEvent.emit('category');
   }
 }
 
