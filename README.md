@@ -14,7 +14,6 @@ To make it convinient for the users to issue complex boolean search, I designed 
 <div align="left">
 	<img src="https://bitbucket.org/romy6047/natural-query-facet/raw/274afa63be0887de2e1a0606afc07e2d26901660/src/assets/images/search_input_3.png">
 </div>
-
 > Figure 2: The interface after adding a few boolean input blocks.
 
 I borrowed the concept of 'Mad Libs' word game and lego blocks to build an intuitive search interface. searchers can start with small with one input and then they can extend the search with modular lego like input boxes by clicking plus icon beside each input block. They can also create groups of blocks to make nested boolean search blocks. The interface looks like a english sentence as they continue addding blocks.
