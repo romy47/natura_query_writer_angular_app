@@ -5,12 +5,12 @@ This is the frontend of a concept search interface built with Angular. It is con
 When I was doing my grad studies I was researching on search interfaces. I found most academic and general purpose search interfaces has two seperate modes. One for issueing simple searches and one that has advanced search options that allows user to issue complex boolean search queries (with boolean terms such as: and, or, not, date filter, etc.). I also found that issuing complex boolean queries are really hard and you have to know the syntax and structure that the search ingine supports.
 
 To make it convinient for the users to issue complex boolean search, I designed an interface where you have one mode to search both types of queries. I also wanted the users to write complex boolean queries in plain english so that there is no need to learn the the boolean search syntax. Also, the interface does not overwhelm the searcher with tons of input boxes. It starts with one, then the user can add new blocks (and, or, not, date filter, group) as they build their query sentence.
-<br><br><br><br>
+<br><br><br>
 <div align="left">
 	<img src="https://bitbucket.org/romy6047/natural-query-facet/raw/aa1573719740a357ea3a2f66cef1b67a7b063f1b/src/assets/images/search_input_1.png">
 </div>
 > Figure 1: Initial view of the search interface. This view is a good spot for quickly issuing a simple query.
-<br><br><br><br>
+
 <div align="left">
 	<img src="https://bitbucket.org/romy6047/natural-query-facet/raw/274afa63be0887de2e1a0606afc07e2d26901660/src/assets/images/search_input_3.png">
 </div>
