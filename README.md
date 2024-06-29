@@ -8,7 +8,7 @@ To make it convenient for users to issue complex Boolean searches, I designed an
 <div align="left">
 	<img src="https://bitbucket.org/romy6047/natural-query-facet/raw/aa1573719740a357ea3a2f66cef1b67a7b063f1b/src/assets/images/search_input_1.png">
 </div>
-> Figure 1: Initial view of the search interface. This view is a good spot for quickly issuing a simple query.
+> Figure 1: Initial view of the search interface. This view is a good place for quickly issuing a simple query.
 
 <div align="left">
 	<img src="https://bitbucket.org/romy6047/natural-query-facet/raw/274afa63be0887de2e1a0606afc07e2d26901660/src/assets/images/search_input_3.png">
@@ -22,7 +22,7 @@ The interface also has a tree visualization underneath that shows how their nest
 <div align="left">
 	<img src="https://bitbucket.org/romy6047/natural-query-facet/raw/274afa63be0887de2e1a0606afc07e2d26901660/src/assets/images/tree_visualization.png">
 </div>
-> Figure 3: The tree visualization correspond to the the boolean query.
+> Figure 3: The tree visualization corresponds to the current boolean query.
 
 ## Features
 - Autocomplete of search terms as user types, powered by Wikipedia API
