@@ -1,5 +1,5 @@
 # Natural Query Writer
-This is the front end of a concept search interface built with Angular. It is connected with Wikipedia API for search term auto-complete.
+A concept search interface for effortlesly writing Boolean search queries using plain English. The frontend app is built with Angular. It is connected with Wikipedia API for search term auto-complete.
 
 ## Motivation
 During my graduate studies, I conducted research on search interfaces. I discovered that most academic and general-purpose search interfaces have two separate modes: one for issuing simple searches and another with advanced search options for complex Boolean queries (using terms such as AND, OR, NOT, date filter, etc.). I also found that issuing complex Boolean queries is really hard, as you need to know the syntax and structure that the search engine supports.
